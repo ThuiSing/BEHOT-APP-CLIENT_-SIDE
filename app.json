@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "last-one",
-    "slug": "last-one",
+    "name": "BEHOT",
+    "slug": "behot",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "A Hoodies mini shop android app",
+    "githubUrl": "https://github.com/ThuiSing/BEHOT-APP-CLIENT_-SIDE"
   }
 }

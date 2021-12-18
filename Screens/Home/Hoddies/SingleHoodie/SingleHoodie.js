@@ -22,7 +22,7 @@ const SingleHoodie = () => {
   // console.log(id);
 
   useEffect(() => {
-    fetch(`http://192.168.0.107:5000/hoodies/${id}`)
+    fetch(`https://fast-bayou-02347.herokuapp.com/hoodies/${id}`)
       .then((response) => response.json())
       .then((json) => setHoodie(json))
       .catch((error) => console.error(error))
@@ -44,7 +44,10 @@ const SingleHoodie = () => {
               text: "Purchase",
               onPress: () =>
                 axios
-                  .post(`http://192.168.0.107:5000/orderedItems`, item)
+                  .post(
+                    `https://fast-bayou-02347.herokuapp.com/orderedItems`,
+                    item
+                  )
                   .then((res) => {
                     console.log(res.data);
                     if (

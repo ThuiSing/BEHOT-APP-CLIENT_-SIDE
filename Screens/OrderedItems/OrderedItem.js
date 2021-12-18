@@ -10,7 +10,7 @@ const OrderedItem = () => {
   //   console.log(orderedItems);
   useEffect(() => {
     axios
-      .get(`http://192.168.0.107:5000/orderedItems/${user?.email}`)
+      .get(`https://fast-bayou-02347.herokuapp.com/orderedItems/${user?.email}`)
       .then((res) => setOrderedItems(res.data));
   }, [user.email]);
 
@@ -26,7 +26,7 @@ const OrderedItem = () => {
         text: "OK",
         onPress: () =>
           axios
-            .delete(`http://192.168.0.107:5000/orderedItems/${id}`)
+            .delete(`https://fast-bayou-02347.herokuapp.com/orderedItems/${id}`)
             .then((res) => {
               if (res.data.deletedCount > 0) {
                 console.log("hello dee");
