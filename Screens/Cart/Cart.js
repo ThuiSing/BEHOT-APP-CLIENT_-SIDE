@@ -45,19 +45,29 @@ const Cart = () => {
             </View>
           );
         })}
-      <View style={{ alignItems: "center", marginVertical: 20 }}>
-        <TouchableOpacity
-          onPress={() => handleAllOrders(cart)}
-          style={{
-            backgroundColor: "#412130",
-            padding: 6,
-            width: 120,
-            alignItems: "center",
-          }}
-        >
-          <Text style={{ color: "#f7ead1" }}>Order All Now</Text>
-        </TouchableOpacity>
-      </View>
+
+      {cart.length <= 0 && (
+        <View>
+          <Text style={{ color: "red", marginTop: 20, fontSize: 17 }}>
+            Sorry, You didn't add any item on cart
+          </Text>
+        </View>
+      )}
+      {cart.length >= 1 && (
+        <View style={{ alignItems: "center", marginVertical: 20 }}>
+          <TouchableOpacity
+            onPress={() => handleAllOrders(cart)}
+            style={{
+              backgroundColor: "#412130",
+              padding: 6,
+              width: 120,
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "#f7ead1" }}>Order All Now</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </ScrollView>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import { NativeRouter, Route, Routes } from "react-router-native";
 import Cart from "./Cart/Cart";
+import GiveReview from "./GiveReview/GiveReview";
 import Hoodies from "./Home/Hoddies/Hoodies";
 import SingleHoodie from "./Home/Hoddies/SingleHoodie/SingleHoodie";
 import Home from "./Home/Home";
@@ -27,6 +28,10 @@ const AllRoutes = () => {
         <Route
           path="/OrderedItems"
           element={user?.email ? <OrderedItem /> : <Login />}
+        />
+        <Route
+          path="/setReview"
+          element={user?.email ? <GiveReview /> : <Login />}
         />
       </Routes>
       <Navigation />

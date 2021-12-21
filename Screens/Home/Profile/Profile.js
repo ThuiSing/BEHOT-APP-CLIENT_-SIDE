@@ -43,13 +43,22 @@ const Profile = () => {
           <Text style={{ fontSize: 17, marginVertical: 10 }}>
             Email : {user?.email}
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity style={{ marginTop: 25 }}>
             <Link style={styles.button} to="/OrderedItems">
-              <Text style={{ color: "#f7ead1" }}>My Orders</Text>
+              <Text style={{ color: "#000", fontWeight: "700" }}>
+                My Orders
+              </Text>
+            </Link>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Link style={styles.button} to="/setReview">
+              <Text style={{ color: "#000", fontWeight: "700" }}>
+                Review website
+              </Text>
             </Link>
           </TouchableOpacity>
           <TouchableOpacity onPress={handleLogout} style={styles.button}>
-            <Text style={{ color: "#f7ead1" }}>Log out</Text>
+            <Text style={{ color: "#000", fontWeight: "700" }}>Log out</Text>
           </TouchableOpacity>
         </View>
       ) : (
@@ -64,7 +73,7 @@ export default Profile;
 const styles = StyleSheet.create({
   button: {
     paddingVertical: 8,
-    backgroundColor: "#412130",
+    backgroundColor: "#d9d9d9",
     borderRadius: 3,
     marginBottom: 10,
     width: 200,

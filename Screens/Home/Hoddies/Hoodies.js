@@ -10,15 +10,14 @@ import { EvilIcons } from "@expo/vector-icons";
 
 const Hoodies = ({ showAll }) => {
   const { hoodies } = useSelector((state) => state.hoodie);
-  const user = useSelector((state) => console.log(state.firebase));
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchHoodiesData());
   }, []);
   return (
-    <ScrollView style={{ zIndex: 1, marginBottom: 50 }}>
+    <ScrollView style={{ zIndex: 1 }}>
       <View style={{ alignItems: "center", marginTop: 20 }}>
-        <Text h3>Our Items</Text>
+        <Text style={{ fontSize: 22, fontWeight: "bold" }}>Our Items</Text>
       </View>
       <View>
         {(showAll ? hoodies : hoodies.slice(0, 4)).map((item) => (
@@ -56,12 +55,12 @@ const Hoodies = ({ showAll }) => {
                     flexDirection: "row",
                     justifyContent: "center",
                     alignItems: "center",
-                    backgroundColor: "#412130",
+                    backgroundColor: "gray",
                     padding: 8,
                   }}
                 >
-                  <AntDesign name="arrowright" size={24} color="#f7ead1" />
-                  <Text style={{ marginLeft: 5, color: "#f7ead1" }}>
+                  <AntDesign name="arrowright" size={24} color="#fff" />
+                  <Text style={{ marginLeft: 5, color: "#fff" }}>
                     Show Details
                   </Text>
                 </View>
@@ -82,15 +81,15 @@ const Hoodies = ({ showAll }) => {
             <Link to="/hoodies">
               <View
                 style={{
-                  backgroundColor: "#f7ead1",
+                  backgroundColor: "#dfdfdf",
                   padding: 10,
                   alignItems: "center",
                   flexDirection: "row",
                   justifyContent: "center",
                 }}
               >
-                <Text style={{ color: "#412120" }}>Show More hoodies</Text>
-                <EvilIcons name="arrow-right" size={24} color="#412120" />
+                <Text style={{ color: "#000" }}>Show More hoodies</Text>
+                <EvilIcons name="arrow-right" size={24} color="#000" />
               </View>
             </Link>
           </TouchableOpacity>

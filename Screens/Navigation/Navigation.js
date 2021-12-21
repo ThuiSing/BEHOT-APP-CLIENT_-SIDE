@@ -12,7 +12,7 @@ const Navigation = () => {
       style={{
         backgroundColor: "#fffffe",
         position: "absolute",
-        backgroundColor: "#412120",
+        backgroundColor: "#404040",
         width: "100%",
         height: 50,
         zIndex: 50,
@@ -26,17 +26,17 @@ const Navigation = () => {
     >
       <Link style={styles.navigationBtn} to="/">
         <Text>
-          <Entypo name="home" size={24} color="#f7ead1" />
+          <Entypo name="home" size={24} color="#fff" />
         </Text>
       </Link>
       <Link style={styles.navigationBtn} to="/cart">
         <Text>
-          <AntDesign name="shoppingcart" size={24} color="#f7ead1" />
+          <AntDesign name="shoppingcart" size={24} color="#fff" />
         </Text>
       </Link>
       <Link style={styles.navigationBtn} to="/profile">
         <Text>
-          <FontAwesome name="user-circle-o" size={24} color="#f7ead1" />
+          <FontAwesome name="user-circle-o" size={24} color="#fff" />
         </Text>
       </Link>
     </View>
