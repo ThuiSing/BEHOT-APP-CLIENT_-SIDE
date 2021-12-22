@@ -10,9 +10,11 @@ const Review = () => {
   const [review, setReview] = useState([]);
   useEffect(() => {
     const fetchData = () => {
-      axios.get("http://192.168.0.107:5000/reviews").then((res) => {
-        setReview(res.data);
-      });
+      axios
+        .get("https://fast-bayou-02347.herokuapp.com/reviews")
+        .then((res) => {
+          setReview(res.data);
+        });
     };
     fetchData();
   }, []);

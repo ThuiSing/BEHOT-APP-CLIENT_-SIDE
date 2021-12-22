@@ -1,18 +1,13 @@
 import React, { useRef, useState } from "react";
 import { TouchableHighlight, View } from "react-native";
 import { Button, Text, Input } from "react-native-elements";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-native";
-import Profile from "../Home/Profile/Profile";
 import useAuth from "../Hooks/UseAuth";
 
 const Login = () => {
-  const { user, LoginEmail, logInError, setLogInError } = useAuth();
+  const { LoginEmail, logInError, setLogInError } = useAuth();
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  // const [error, setError] = useState("");
-  // const { user } = useSelector((state) => state.firebase.firebase());
-  // console.log(logInError);
   const getValue = (e) => {
     setEmail(e);
   };

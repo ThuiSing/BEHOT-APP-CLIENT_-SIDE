@@ -38,7 +38,7 @@ const GiveReview = () => {
         onPress: () => {
           setLoader(true);
           axios
-            .post(`http://192.168.0.107:5000/reviews`, review)
+            .post(`https://fast-bayou-02347.herokuapp.com/reviews`, review)
             .then((res) => {
               if (res.data.insertedId) {
                 Alert.alert("", "Review Done");

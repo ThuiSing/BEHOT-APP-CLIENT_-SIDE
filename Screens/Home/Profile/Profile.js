@@ -1,12 +1,12 @@
 import React from "react";
 import { Text, View, TouchableOpacity, Alert, StyleSheet } from "react-native";
-import { Button, Image } from "react-native-elements";
+import { Image } from "react-native-elements";
 import { Link } from "react-router-native";
 import useAuth from "../../Hooks/UseAuth";
 import Login from "../../Login/Login";
 
 const Profile = () => {
-  const { user, loggedOut } = useAuth();
+  const { isAdmin, user, loggedOut } = useAuth();
 
   const handleLogout = () => {
     Alert.alert("", "Are you sure to logout ? ", [
@@ -57,6 +57,15 @@ const Profile = () => {
               </Text>
             </Link>
           </TouchableOpacity>
+          {isAdmin && (
+            <TouchableOpacity>
+              <Link style={styles.button} to="/add-product">
+                <Text style={{ color: "#000", fontWeight: "700" }}>
+                  Add Product
+                </Text>
+              </Link>
+            </TouchableOpacity>
+          )}
           <TouchableOpacity onPress={handleLogout} style={styles.button}>
             <Text style={{ color: "#000", fontWeight: "700" }}>Log out</Text>
           </TouchableOpacity>

@@ -14,7 +14,6 @@ const App = () => {
       <AuthProvider>
         <SafeAreaView style={styles.container}>
           <StatusBar animated={true} backgroundColor="#fff" />
-          <Header />
           <AllRoutes />
         </SafeAreaView>
       </AuthProvider>

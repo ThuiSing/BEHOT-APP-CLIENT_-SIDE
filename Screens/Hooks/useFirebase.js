@@ -9,12 +9,14 @@ import {
   updateProfile,
 } from "firebase/auth";
 import firebaseInitialize from "../../firebase/firebaseInitialize";
+import axios from "axios";
 
 firebaseInitialize();
 const useFirebase = () => {
   const [user, setUser] = useState({});
   const [logInError, setLogInError] = useState("");
   const [RegisterError, setRegisterError] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const auth = getAuth();
 
@@ -26,12 +28,13 @@ const useFirebase = () => {
       }
     });
     return () => unSubscribe();
-  }, [auth]);
+  }, [user]);
 
   const emailRegister = (email, password, name) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
+        console.log(email);
+        savetoDB(email, name);
         const user = userCredential.user;
         if (user) {
           updateProfile(auth.currentUser, {
@@ -39,11 +42,14 @@ const useFirebase = () => {
           })
             .then(() => {
               setUser(user);
+              setRegisterError("");
             })
             .catch((error) => {
               setRegisterError(error.message);
             });
           setUser(user);
+          console.log(user);
+          setRegisterError("");
         }
       })
       .catch((error) => {
@@ -55,6 +61,7 @@ const useFirebase = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         setUser(user);
+        setLogInError("");
       })
       .catch((error) => {
         setLogInError(error.message);
@@ -70,6 +77,22 @@ const useFirebase = () => {
       });
   };
 
+  const savetoDB = (email, name) => {
+    const doc = { name, email };
+    axios
+      .post("https://fast-bayou-02347.herokuapp.com/users", doc)
+      .then((res) => console.log(res));
+  };
+
+  // check admin
+  useEffect(() => {
+    axios
+      .get(`https://fast-bayou-02347.herokuapp.com/users/${user.email}`)
+      .then((res) => {
+        setIsAdmin(res.data.isAdmin);
+      });
+  }, [user.email]);
+
   return {
     user,
     emailRegister,
@@ -79,6 +102,7 @@ const useFirebase = () => {
     setLogInError,
     RegisterError,
     setRegisterError,
+    isAdmin,
   };
 };
 export default useFirebase;

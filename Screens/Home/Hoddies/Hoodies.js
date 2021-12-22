@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, TouchableOpacity, ScrollView } from "react-native";
 import { Card, Rating, Text } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
-import { Link, Outlet } from "react-router-native";
+import { Link } from "react-router-native";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { fetchHoodiesData } from "../../../Redux/Slices/HoodiesSlice";
@@ -21,7 +21,7 @@ const Hoodies = ({ showAll }) => {
       </View>
       <View>
         {(showAll ? hoodies : hoodies.slice(0, 4)).map((item) => (
-          <Card key={item.id}>
+          <Card key={item._id}>
             <Card.Title>{item.itemName}</Card.Title>
             <Card.Divider />
             <Card.Image

@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Button, Image, Text } from "react-native-elements";
+import { Image, Text } from "react-native-elements";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-native";
 import { addToCart } from "../../../../Redux/Slices/HoodiesSlice";
@@ -18,13 +18,14 @@ import PlaceOrder from "../../PlaceOrder/PlaceOrder";
 const SingleHoodie = () => {
   const { id } = useParams();
   const [hoodie, setHoodie] = useState({});
-  const [loader, setLoader] = useState(false);
+  const [loader, setLoader] = useState(true);
   const dispatch = useDispatch();
   const { user } = useAuth();
   const [popupModal, setPopupModal] = useState(false);
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
+    setLoader(true);
     fetch(`https://fast-bayou-02347.herokuapp.com/hoodies/${id}`)
       .then((response) => response.json())
       .then((json) => setHoodie(json))
@@ -46,7 +47,6 @@ const SingleHoodie = () => {
   };
 
   const fadeIn = () => {
-    // Will change fadeAnim value to 1 in 5 seconds
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 3000,
@@ -55,7 +55,6 @@ const SingleHoodie = () => {
   };
 
   const fadeOut = () => {
-    // Will change fadeAnim value to 0 in 3 seconds
     Animated.timing(fadeAnim, {
       toValue: 0,
       duration: 3000,
@@ -65,61 +64,77 @@ const SingleHoodie = () => {
 
   return (
     <>
-      <ScrollView
-        style={{
-          paddingHorizontal: 15,
-          marginBottom: 50,
-        }}
-      >
-        <View style={{ alignItems: "center" }}>
-          <Image
-            source={{ uri: hoodie?.img }}
-            style={{ width: 300, height: 300 }}
-          />
-        </View>
-        <View style={{ paddingVertical: 15 }}>
-          <Text h4>{hoodie?.itemName}</Text>
-          <View style={{ marginVertical: 15 }}>
-            {hoodie.description &&
-              hoodie?.description.map((desc, indx) => (
-                <View
-                  key={indx}
-                  style={{
-                    flexDirection: "row",
-                    marginTop: 5,
-                    alignItems: "center",
-                  }}
-                >
-                  <Text>{"\u2022"}</Text>
-                  <Text style={{ flex: 1, paddingLeft: 5, fontSize: 16 }}>
-                    {desc}
-                  </Text>
-                </View>
-              ))}
-          </View>
-          <Text h4>Price: ${hoodie?.price}</Text>
-        </View>
-
+      {loader ? (
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginBottom: 20,
+            height: "90%",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          <TouchableOpacity onPress={() => handleOrder(hoodie)}>
-            <View style={styles.singleItemBtn}>
-              <Text style={{ fontSize: 17 }}>Order Now</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => handleCart(hoodie)}
-            style={styles.singleItemBtn}
-          >
-            <Text style={{ fontSize: 17 }}>Add to cart</Text>
-          </TouchableOpacity>
+          <Image
+            source={require("../../../../assets/loader.gif")}
+            style={{ width: 80, height: 80 }}
+          />
         </View>
-      </ScrollView>
+      ) : (
+        <ScrollView
+          style={{
+            paddingHorizontal: 15,
+            marginBottom: 50,
+          }}
+        >
+          <View style={{ alignItems: "center" }}>
+            <Image
+              source={{ uri: hoodie?.img }}
+              style={{ width: 300, height: 300 }}
+            />
+          </View>
+          <View style={{ paddingVertical: 15 }}>
+            <Text h4>{hoodie?.itemName}</Text>
+            <View style={{ marginVertical: 15 }}>
+              {hoodie.description &&
+                hoodie?.description.map((desc, indx) => (
+                  <View
+                    key={indx}
+                    style={{
+                      flexDirection: "row",
+                      marginTop: 5,
+                      alignItems: "center",
+                    }}
+                  >
+                    <Text>{"\u2022"}</Text>
+                    <Text style={{ flex: 1, paddingLeft: 5, fontSize: 16 }}>
+                      {desc}
+                    </Text>
+                  </View>
+                ))}
+            </View>
+            <Text h4>Price: ${hoodie?.price}</Text>
+          </View>
+
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginBottom: 20,
+            }}
+          >
+            <TouchableOpacity onPress={() => handleOrder(hoodie)}>
+              <View style={styles.singleItemBtn}>
+                <Text style={{ fontSize: 17 }}>Order Now</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => handleCart(hoodie)}
+              style={styles.singleItemBtn}
+            >
+              <Text style={{ fontSize: 17 }}>Add to cart</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      )}
+
       {popupModal && (
         <PlaceOrder
           popupModal={popupModal}
